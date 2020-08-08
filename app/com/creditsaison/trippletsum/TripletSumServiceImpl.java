@@ -73,7 +73,7 @@ public class TripletSumServiceImpl implements TripletSumService{
 		trippletSum.setInputArray(inputArAsString);
 		trippletSum.setOutputArray(outputArAsString);
 		trippletSum.setRequiredSum(requiredSum);
-		trippletSumDao.save(trippletSum);
+		trippletSumDao.savebeans(trippletSum);
 		
 	}
 
@@ -139,6 +139,11 @@ public class TripletSumServiceImpl implements TripletSumService{
 		ValidationUtils.notNull(requestVO.getRequiredSum(), "Sum should not be null");
 		ValidationUtils.notEmpty(requestVO.getInputArray(), "input array size should be greater then 3");
 		
+	}
+	
+
+	public static void main(String[] args) {
+		System.out.println("HI");
 	}
 
 }

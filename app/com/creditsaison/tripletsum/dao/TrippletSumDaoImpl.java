@@ -20,5 +20,11 @@ public class TrippletSumDaoImpl extends CommonDaoImpl<TripletSum> implements Tri
 		
 	}
 	
+	@Override
+	public void savebeans(TripletSum tripletSum) {
+		getDB().save(tripletSum);
+		
+	}
+	
 
 }

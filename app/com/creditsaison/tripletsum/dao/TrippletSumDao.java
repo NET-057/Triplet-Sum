@@ -11,4 +11,6 @@ public interface TrippletSumDao extends CommonDao<TripletSum>{
 
 	List<TripletSum> getAllEntries();
 
+	void savebeans(TripletSum tripletSum);
+
 }

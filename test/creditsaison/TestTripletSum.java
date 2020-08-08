@@ -1,4 +1,4 @@
-package creditSaison;
+package creditsaison;
 
 import static org.junit.Assert.assertArrayEquals;
 
@@ -14,15 +14,15 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.mockito.Mockito;
 
-import com.creditsaison.trippletsum.TrippletSumServiceImpl;
-import com.creditsaison.trippletsum.dao.TrippletSumDao;
-import com.creditsaison.trippletsum.vo.TrippletSumVO;
+import com.creditsaison.tripletsum.dao.TrippletSumDao;
+import com.creditsaison.tripletsum.vo.TripletSumVO;
+import com.creditsaison.trippletsum.TripletSumServiceImpl;
+
 
 @RunWith(Parameterized.class)
-public class TestTrippletSum {
+public class TestTripletSum {
 
-	
-	private TrippletSumServiceImpl trippletSumImpl;
+	private TripletSumServiceImpl trippletSumImpl;
 	private TrippletSumDao trippletSumDao;
 	
 	 @Parameters
@@ -48,19 +48,21 @@ public class TestTrippletSum {
 	
 	@Before
 	public void setUp() {
+//		TripletSum tripletSum = new TripletSum();
 		trippletSumDao = Mockito.mock(TrippletSumDao.class);
-		Mockito.when(trippletSumDao.save(null)).thenReturn(null);
-		trippletSumImpl = new TrippletSumServiceImpl(null);
+		trippletSumDao.savebeans(null);
+		trippletSumImpl = new TripletSumServiceImpl(trippletSumDao);
 		
 	}
+
 	
 	@Test
-	public void testCheckTrippletSum() {
-		TrippletSumVO trippletSumRequestVO = new TrippletSumVO();
+	public void testCheckTripletSum() {
+		TripletSumVO trippletSumRequestVO = new TripletSumVO();
 		trippletSumRequestVO.setInputArray(inputArray);
 		trippletSumRequestVO.setRequiredSum(totalSum);
-		TrippletSumVO trippletSumResponseVO = trippletSumImpl.getTrippletSum(trippletSumRequestVO);
-		assertArrayEquals(outputArray.toArray(), trippletSumResponseVO.getOutputArray().toArray()));
+		TripletSumVO trippletSumResponseVO = trippletSumImpl.getTripletSum(trippletSumRequestVO);
+		assertArrayEquals(outputArray.toArray(), trippletSumResponseVO.getOutputArray().toArray());
 	}
 	
 }

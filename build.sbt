@@ -15,4 +15,4 @@ libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.44"
 libraryDependencies += "com.google.code.gson" % "gson" % "2.3.1"
 
 // https://mvnrepository.com/artifact/org.mockito/mockito-all
-libraryDependencies += "org.mockito" % "mockito-all" % "1.10.19" % Test
+libraryDependencies += "org.mockito" % "mockito-core" % "2.10.0" % "test"
