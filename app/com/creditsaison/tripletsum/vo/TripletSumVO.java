@@ -9,38 +9,40 @@ public class TripletSumVO extends SuccessVO{
 
 	@SerializedName("input_array")
 	@Expose
-	private List<Long> inputArray;
+	private List<Integer> inputArray;
 
 	@SerializedName("required_sum")
 	@Expose
-	private Long requiredSum;
+	private Integer requiredSum;
 
 	@SerializedName("triplet_array")
 	@Expose
-	private List<Long> outputArray;
+	private List<Integer> outputArray;
 
-	public Long getRequiredSum() {
-		return requiredSum;
-	}
-
-	public void setRequiredSum(Long requiredSum) {
-		this.requiredSum = requiredSum;
-	}
-
-	public List<Long> getInputArray() {
+	public List<Integer> getInputArray() {
 		return inputArray;
 	}
 
-	public void setInputArray(List<Long> inputArray) {
+	public void setInputArray(List<Integer> inputArray) {
 		this.inputArray = inputArray;
 	}
 
-	public List<Long> getOutputArray() {
+	public Integer getRequiredSum() {
+		return requiredSum;
+	}
+
+	public void setRequiredSum(Integer requiredSum) {
+		this.requiredSum = requiredSum;
+	}
+
+	public List<Integer> getOutputArray() {
 		return outputArray;
 	}
 
-	public void setOutputArray(List<Long> outputArray) {
+	public void setOutputArray(List<Integer> outputArray) {
 		this.outputArray = outputArray;
 	}
+
+
 
 }

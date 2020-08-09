@@ -15,7 +15,7 @@ public class TripletSum extends Model{
 	
 	private String inputArray;
 	
-	private Long requiredSum;
+	private Integer requiredSum;
 	
 	private String outputArray;
 
@@ -35,11 +35,11 @@ public class TripletSum extends Model{
 		this.inputArray = inputArray;
 	}
 
-	public Long getRequiredSum() {
+	public Integer getRequiredSum() {
 		return requiredSum;
 	}
 
-	public void setRequiredSum(Long requiredSum) {
+	public void setRequiredSum(Integer requiredSum) {
 		this.requiredSum = requiredSum;
 	}
 

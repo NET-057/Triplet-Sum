@@ -37,9 +37,9 @@ public class TripletSumServiceImpl implements TripletSumService{
 		TripletSumVO trippletSumResponseVO = new TripletSumVO();
 		try {
 			isValidInput(requestVO);
-			List<Long> inputArray = requestVO.getInputArray();
-			Long requiredSum = requestVO.getRequiredSum();
-			List<Long> tripplet = getTripplet(inputArray, requiredSum);
+			List<Integer> inputArray = requestVO.getInputArray();
+			Integer requiredSum = requestVO.getRequiredSum();
+			List<Integer> tripplet = getTripplet(inputArray, requiredSum);
 			saveResultDB(inputArray, requiredSum, tripplet);
 			updateResponse(requestVO, tripplet, trippletSumResponseVO);
 			
@@ -56,7 +56,7 @@ public class TripletSumServiceImpl implements TripletSumService{
 	}
 	
 
-	private TripletSumVO updateResponse(TripletSumVO requestVO, List<Long> tripplet, TripletSumVO trippletSumVO) {
+	private TripletSumVO updateResponse(TripletSumVO requestVO, List<Integer> tripplet, TripletSumVO trippletSumVO) {
 		trippletSumVO.setInputArray(requestVO.getInputArray());
 		trippletSumVO.setRequiredSum(requestVO.getRequiredSum());
 		trippletSumVO.setOutputArray(tripplet);
@@ -66,10 +66,10 @@ public class TripletSumServiceImpl implements TripletSumService{
 
 
 
-	private void saveResultDB(List<Long> inputArray, Long requiredSum, List<Long> resultantArray) {
+	private void saveResultDB(List<Integer> inputArray, Integer requiredSum, List<Integer> tripplet) {
 		TripletSum trippletSum = new TripletSum();
 		String inputArAsString = TrippletSumUtils.getString(inputArray);
-		String outputArAsString = TrippletSumUtils.getString(resultantArray);
+		String outputArAsString = TrippletSumUtils.getString(tripplet);
 		trippletSum.setInputArray(inputArAsString);
 		trippletSum.setOutputArray(outputArAsString);
 		trippletSum.setRequiredSum(requiredSum);
@@ -79,9 +79,9 @@ public class TripletSumServiceImpl implements TripletSumService{
 
 
 
-	public List<Long> getTripplet(List<Long> arrayInput, Long totalSum){
-		int arraySize = arrayInput.size();
-		Collections.sort(arrayInput);
+	public List<Integer> getTripplet(List<Integer> inputArray, Integer requiredSum){
+		int arraySize = inputArray.size();
+		Collections.sort(inputArray);
 		int start = -1;
 		int end = -1;
 		int i = -1;
@@ -90,11 +90,11 @@ public class TripletSumServiceImpl implements TripletSumService{
 	        start = i + 1; 
 	        end = arraySize - 1; 
 	        while (start < end) { 
-	            if (arrayInput.get(i) + arrayInput.get(start) + arrayInput.get(end) == totalSum) { 
+	            if (inputArray.get(i) + inputArray.get(start) + inputArray.get(end) == requiredSum) { 
 	            	isTrippletFound = true;
 	                break; 
 	            
-	            } else if (arrayInput.get(i) + arrayInput.get(start) + arrayInput.get(end) < totalSum) {
+	            } else if (inputArray.get(i) + inputArray.get(start) + inputArray.get(end) < requiredSum) {
 	                start++; 
 
 	            }else {
@@ -108,7 +108,7 @@ public class TripletSumServiceImpl implements TripletSumService{
 	    }
 	    
 	    if(isTrippletFound) {
-	    	return getTripletArray(arrayInput, start, end, i);
+	    	return getTripletArray(inputArray, i, start, end);
 	    	
 	    } else {
 			return new LinkedList<>();
@@ -116,12 +116,12 @@ public class TripletSumServiceImpl implements TripletSumService{
 	}
 	
 	
-	private List<Long> getTripletArray(List<Long> arrayInput, int p1, int p2, int p3) {
-		List<Long> outputArray = new LinkedList<Long>();
+	private List<Integer> getTripletArray(List<Integer> inputArray, int p1, int p2, int p3) {
+		List<Integer> outputArray = new LinkedList<>();
 		if(p1 > 0 && p2 > 0 && p3 > 0) {
-			outputArray.add(arrayInput.get(p1));
-			outputArray.add(arrayInput.get(p2));
-			outputArray.add(arrayInput.get(p3));
+			outputArray.add(inputArray.get(p1));
+			outputArray.add(inputArray.get(p2));
+			outputArray.add(inputArray.get(p3));
 		}
 		return outputArray;
 		

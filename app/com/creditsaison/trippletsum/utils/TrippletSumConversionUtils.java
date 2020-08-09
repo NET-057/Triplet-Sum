@@ -15,29 +15,29 @@ public class TrippletSumConversionUtils {
 	public static TripletSumVO toVo(TripletSum trippletSum) {
 
 		TripletSumVO trippletVO  = new TripletSumVO();
-		List<Long> inputArray = getInputArray(trippletSum);
+		List<Integer> inputArray = getInputArray(trippletSum);
 		trippletVO.setInputArray(inputArray);
 		trippletVO.setRequiredSum(trippletSum.getRequiredSum());
-		List<Long> outputArray = getOutputArray(trippletSum);
+		List<Integer> outputArray = getOutputArray(trippletSum);
 		trippletVO.setOutputArray(outputArray);
 		return trippletVO;
 	}
 
-	private static List<Long> getOutputArray(TripletSum trippletSum) {
+	private static List<Integer> getOutputArray(TripletSum trippletSum) {
 		if(trippletSum.getOutputArray() == null) {
 			return new LinkedList<>();
 		}
 		return getArrayList(trippletSum.getOutputArray());
 	}
 
-	private static List<Long> getInputArray(TripletSum trippletSum){
+	private static List<Integer> getInputArray(TripletSum trippletSum){
 		return getArrayList(trippletSum.getInputArray());
 	}
 	
-	private static List<Long> getArrayList(String arrayAsString){
+	private static List<Integer> getArrayList(String arrayAsString){
 		if(arrayAsString != null) {
 			String[] split = arrayAsString.split(",");
-			return Stream.of(split).map(d1 -> Long.parseLong(d1)).collect(Collectors.toList());
+			return Stream.of(split).map(d1 -> Integer.parseInt(d1)).collect(Collectors.toList());
 		}
 		return new LinkedList<>();
 	}

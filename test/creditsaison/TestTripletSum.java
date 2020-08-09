@@ -1,6 +1,6 @@
 package creditsaison;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,27 +28,27 @@ public class TestTripletSum {
 	 @Parameters
 	 public static Collection<Object[]> data() {
 	        return Arrays.asList(new Object[][] { 
-	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) },
-	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) },
-	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) },
-	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) }
+	                 { Arrays.asList(12, 3, 4, 1, 6, 9), 24, true},
+	                 { Arrays.asList(12, 3, 4, 1, 6, 9), 25, true},
+//	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) },
+//	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) },
+//	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) }
 	           });
 	    }
 	   
 	@Parameter(0)
-	public List<Long> inputArray;
+	public List<Integer> inputArray;
 	 
 	@Parameter(1)
-	public Long totalSum;
+	public Integer totalSum;
 	 
 	@Parameter(2)
-	public List<Long> outputArray;
+	public boolean isContain;
 	
 	
 	
 	@Before
 	public void setUp() {
-//		TripletSum tripletSum = new TripletSum();
 		trippletSumDao = Mockito.mock(TrippletSumDao.class);
 		trippletSumDao.savebeans(null);
 		trippletSumImpl = new TripletSumServiceImpl(trippletSumDao);
@@ -62,7 +62,8 @@ public class TestTripletSum {
 		trippletSumRequestVO.setInputArray(inputArray);
 		trippletSumRequestVO.setRequiredSum(totalSum);
 		TripletSumVO trippletSumResponseVO = trippletSumImpl.getTripletSum(trippletSumRequestVO);
-		assertArrayEquals(outputArray.toArray(), trippletSumResponseVO.getOutputArray().toArray());
+		boolean isFind = trippletSumResponseVO.getOutputArray().size() > 0 ? true : false;
+		assertTrue("Test", isFind == isContain);;
 	}
 	
 }
