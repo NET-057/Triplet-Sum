@@ -44,7 +44,7 @@ public class TripletSumServiceImpl implements TripletSumService{
 			updateResponse(requestVO, tripplet, trippletSumResponseVO);
 			
 		} catch (ValidationException validEx) {
-			LOGGER.warn("validation Error "+requestVO,validEx.getMessage());
+			LOGGER.warn("validation Error for "+requestVO,validEx.getMessage(),validEx);
 			SuccessVO.updateSuccessVO(trippletSumResponseVO, false, validEx.getMessage());
 		
 		} catch (Exception e) {

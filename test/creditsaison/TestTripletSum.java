@@ -30,9 +30,7 @@ public class TestTripletSum {
 	        return Arrays.asList(new Object[][] { 
 	                 { Arrays.asList(12, 3, 4, 1, 6, 9), 24, true},
 	                 { Arrays.asList(12, 3, 4, 1, 6, 9), 25, true},
-//	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) },
-//	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) },
-//	                 { Arrays.asList(1,2,3,4,5,6,7), 20, Arrays.asList(3,4,5) }
+	                 { Arrays.asList(1, 2, 3, 4, 5, 6, 7), 20, true}
 	           });
 	    }
 	   
