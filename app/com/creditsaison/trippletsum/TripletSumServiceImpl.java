@@ -24,7 +24,7 @@ public class TripletSumServiceImpl implements TripletSumService{
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TripletSumServiceImpl.class);
 	private TrippletSumDao trippletSumDao;
-	
+
 	@Inject
 	public TripletSumServiceImpl(TrippletSumDao trippletSumDao) {
 		this.trippletSumDao = trippletSumDao;
@@ -42,19 +42,19 @@ public class TripletSumServiceImpl implements TripletSumService{
 			List<Integer> tripplet = getTripplet(inputArray, requiredSum);
 			saveResultDB(inputArray, requiredSum, tripplet);
 			updateResponse(requestVO, tripplet, trippletSumResponseVO);
-			
+
 		} catch (ValidationException validEx) {
 			LOGGER.warn("validation Error for "+requestVO,validEx.getMessage(),validEx);
 			SuccessVO.updateSuccessVO(trippletSumResponseVO, false, validEx.getMessage());
-		
+
 		} catch (Exception e) {
 			LOGGER.error("Error during calculate sum tripplet for "+requestVO,e);
 			SuccessVO.updateSuccessVO(trippletSumResponseVO, false, "ISE");
 		}
 		return trippletSumResponseVO;
-		
+
 	}
-	
+
 
 	private TripletSumVO updateResponse(TripletSumVO requestVO, List<Integer> tripplet, TripletSumVO trippletSumVO) {
 		trippletSumVO.setInputArray(requestVO.getInputArray());
@@ -74,7 +74,7 @@ public class TripletSumServiceImpl implements TripletSumService{
 		trippletSum.setOutputArray(outputArAsString);
 		trippletSum.setRequiredSum(requiredSum);
 		trippletSumDao.savebeans(trippletSum);
-		
+
 	}
 
 
@@ -85,37 +85,25 @@ public class TripletSumServiceImpl implements TripletSumService{
 		int start = -1;
 		int end = -1;
 		int i = -1;
-		boolean isTrippletFound = false;
-	    for (i = 0; i < arraySize - 2; i++) { 
-	        start = i + 1; 
-	        end = arraySize - 1; 
-	        while (start < end) { 
-	            if (inputArray.get(i) + inputArray.get(start) + inputArray.get(end) == requiredSum) { 
-	            	isTrippletFound = true;
-	                break; 
-	            
-	            } else if (inputArray.get(i) + inputArray.get(start) + inputArray.get(end) < requiredSum) {
-	                start++; 
+		for (i = 0; i < arraySize - 2; i++) { 
+			start = i + 1; 
+			end = arraySize - 1; 
+			while (start < end) { 
+				if (inputArray.get(i) + inputArray.get(start) + inputArray.get(end) == requiredSum) { 
+					return getTripletArray(inputArray, i, start, end);
 
-	            }else {
-	            	end--; 	            	
-	            }
-	        } 
-	        
-	        if(isTrippletFound) {
-	        	break;
-	        }
-	    }
-	    
-	    if(isTrippletFound) {
-	    	return getTripletArray(inputArray, i, start, end);
-	    	
-	    } else {
-			return new LinkedList<>();
+				} else if (inputArray.get(i) + inputArray.get(start) + inputArray.get(end) < requiredSum) {
+					start++; 
+
+				}else {
+					end--; 	            	
+				}
+			} 
 		}
+		return new LinkedList<>();
 	}
-	
-	
+
+
 	private List<Integer> getTripletArray(List<Integer> inputArray, int p1, int p2, int p3) {
 		List<Integer> outputArray = new LinkedList<>();
 		if(p1 > -1 && p2 > -1 && p3 > -1) {
@@ -124,23 +112,23 @@ public class TripletSumServiceImpl implements TripletSumService{
 			outputArray.add(inputArray.get(p3));
 		}
 		return outputArray;
-		
+
 	}
 
 	@Override
 	public TripletHistoryVO getTripletSumHistory() {
 		List<TripletSum> allEntries = trippletSumDao.getAllEntries();
 		return TrippletSumConversionUtils.toVos(allEntries);
-		
+
 	}
-	
+
 
 	private void isValidInput(TripletSumVO requestVO) {
 		ValidationUtils.notNull(requestVO.getRequiredSum(), "Sum should not be null");
 		ValidationUtils.notEmpty(requestVO.getInputArray(), "input array size should be greater then 3");
-		
+
 	}
-	
+
 
 	public static void main(String[] args) {
 		System.out.println("HI");
