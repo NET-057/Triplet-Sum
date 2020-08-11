@@ -43,6 +43,22 @@ public class TripletSumVO extends SuccessVO{
 		this.outputArray = outputArray;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("TripletSumVO [inputArray=");
+		builder.append(inputArray);
+		builder.append(", requiredSum=");
+		builder.append(requiredSum);
+		builder.append(", outputArray=");
+		builder.append(outputArray);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 
+
+	
 
 }

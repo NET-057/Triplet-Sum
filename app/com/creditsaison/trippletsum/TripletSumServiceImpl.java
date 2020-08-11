@@ -118,7 +118,7 @@ public class TripletSumServiceImpl implements TripletSumService{
 	
 	private List<Integer> getTripletArray(List<Integer> inputArray, int p1, int p2, int p3) {
 		List<Integer> outputArray = new LinkedList<>();
-		if(p1 > 0 && p2 > 0 && p3 > 0) {
+		if(p1 > -1 && p2 > -1 && p3 > -1) {
 			outputArray.add(inputArray.get(p1));
 			outputArray.add(inputArray.get(p2));
 			outputArray.add(inputArray.get(p3));
